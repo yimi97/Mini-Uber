@@ -1,0 +1,62 @@
+{% extends "./dashboard.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block dash_content %}
+        <div class="row">
+        <div class="col-4">
+              <h5>Search for rides</h5>
+              <form method="POST">
+                {% csrf_token %}
+                    <div>
+                        <fieldset class="form-group">
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="">
+                            <div class="">
+                               <button class="btn btn-outline-info" type="submit" name="search" value="search">Search</button>
+                            </div>
+                            {% if messages %}
+                            <div class="mt-3 alert alert-primary" role="alert">
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </form>
+        </div>
+        <div class="col-8">
+            <h5>Result</h5>
+            <form method="POST">
+                {% csrf_token %}
+                    <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Destination</th>
+                            <th scope="col">ArrivalTime</th>
+                            <th scope="col">Share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% if ride.exists %}
+                        {% for item in ride %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter}}</th>
+                                <td>{{item.dest}}</td>
+                                <td>{{item.arrival_daytime}}</td>
+                                <td><input type="checkbox" name="choose" value="{{ item.id }}"></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-outline-info" type="submit" name="confirm" value="{{ form.fields.num.value }}">Confirm</button>
+                    </div>
+                    {% endif %}
+                    </tbody>
+            </form>
+        </div>
+        </div>
+{% endblock %}

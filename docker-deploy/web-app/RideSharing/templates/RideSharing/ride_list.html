@@ -1,0 +1,38 @@
+{% extends "./dashboard.html" %}
+{% block dash_content %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Time</th>
+          <th scope="col">Role</th>
+          <th scope="col">Status</th>
+          <th scope="col">Operation</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ride in rides %}
+        <tr>
+          <th scope="row">{{ forloop.counter}}</th>
+          <td>{{ ride.dest }}</td>
+          <td>{{ ride.arrival_daytime|date:'m/d/Y H:i'  }}</td>
+           {% if ride.owner == user  %}
+               <td><span class="badge badge-primary">owner</span></td>
+               {% elif ride.driver == user %}
+               <td><span class="badge badge-success">driver</span></td>
+               {% else %}
+               <td><span class="badge badge-warning">sharer</span></td>
+           {% endif %}
+          <td>{{ ride.get_status_display }}</td>
+          <td class="d-flex ">
+              <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'ride_detail' ride.id %}">Detail</a>
+              {% if ride.status == ride.OPEN or ride.status == ride.OPEN_WITH_SHARER %}
+               <a class="btn btn-outline-secondary btn-sm " href="{% url 'ride_update' ride.id %}">Edit</a>
+              {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+{% endblock  %}

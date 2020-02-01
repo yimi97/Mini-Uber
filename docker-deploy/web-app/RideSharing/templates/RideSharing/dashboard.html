@@ -1,0 +1,59 @@
+{% extends "./base.html" %}
+{% block content %}
+    {#   Side navbar   #}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-auto pr-5">
+                <div class="bg-white">
+                  <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Passenger</p>
+                  <ul class="nav flex-column bg-white mb-0">
+                    <li class="nav-item">
+                      <a href="{% url 'ride_list' %}" class="nav-link text-dark font-italic">
+                           <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+                                Rides
+                           </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'ride_request' %}" class="nav-link text-dark font-italic">
+                            <i class="fa fa-address-card mr-3 text-primary fa-fw"></i>
+                            Start a Ride
+                       </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'sharer_search' %}" class="nav-link text-dark font-italic">
+                                <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
+                                Join a ride
+                            </a>
+                    </li>
+                  </ul>
+
+                  <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">Driver</p>
+
+                  <ul class="nav flex-column bg-white mb-0">
+                    <li class="nav-item">
+                      <a href="{% url 'driver_register' %}" class="nav-link text-dark font-italic">
+                                <i class="fa fa-area-chart mr-3 text-primary fa-fw"></i>
+                                Vehicle Info
+                            </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'driver_search' %}" class="nav-link text-dark font-italic">
+                                <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
+                                Search Rides
+                            </a>
+                    </li>
+                  </ul>
+        </div>
+            </div>
+            <div class="card col">
+                <div class="card-body">
+                    {% block dash_content %}
+                    {% endblock dash_content %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+

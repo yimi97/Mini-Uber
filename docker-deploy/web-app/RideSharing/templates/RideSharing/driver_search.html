@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% extends "./dashboard.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block dash_content %}
+
+
+        <h5>Rides Search Result</h5> <p class="text-muted font-italic">based on your vehicle information</p>
+        <form method="POST">
+            {% csrf_token %}
+
+                <div class="row">
+                <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Arrival Time</th>
+                        <th scope="col">Join</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% if ride.exists %}
+                    {% for item in ride %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter}}</th>
+                            <td>{{item.dest}}</td>
+                            <td>{{item.get_status_display}}</td>
+                            <td>{{item.arrival_daytime}}</td>
+                            <td><input type="checkbox" name="choose" value="{{ item.id }}"></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <div class="col-4">
+                    <button class="btn btn-outline-info" type="submit" name="confirm" value="confirm">Confirm</button>
+                </div>
+                {% endif %}
+                </tbody>
+
+                </div>
+        </form>
+
+
+
+{% endblock %}

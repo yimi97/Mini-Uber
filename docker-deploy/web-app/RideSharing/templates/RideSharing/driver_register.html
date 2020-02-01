@@ -1,0 +1,21 @@
+{% extends "./dashboard.html" %}
+{% load crispy_forms_tags %}
+{% block dash_content %}
+
+        <h5 class="card-title">Register as a driver!</h5>
+          <h6>Please fill out your vehicle info</h6>
+        <form method="POST">
+        {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+            <div class="row justify-content-between">
+                <div class="col-4">
+                    <button class="btn btn-outline-info" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
+
+
+{% endblock %}
