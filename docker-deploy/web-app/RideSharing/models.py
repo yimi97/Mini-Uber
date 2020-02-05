@@ -30,19 +30,18 @@ class vehicle(models.Model):
     )
     driver = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=False,
                                on_delete=models.SET_NULL)  # settings.AUTH_USER_MODEL
-    plate_num = models.CharField(max_length=150)
-    capacity = models.IntegerField()
-    type = models.CharField(max_length=150, choices=CATEGORY, default='Compact')
-    special_request = models.CharField(blank=True, null=True, max_length=150)
+    plate_num = models.CharField(max_length=150, verbose_name="Plate number")
+    capacity = models.IntegerField(verbose_name="Capacity (excluding yourself)")
+    type = models.CharField(max_length=150, choices=CATEGORY, default='Compact', verbose_name="Vehicle type")
+    special_request = models.CharField(blank=True, null=True, max_length=150, verbose_name="Special request")
+    realname = models.CharField(max_length=150, default=None, verbose_name="Your real name")
 
     def get_absolute_url(self):
-        return reverse('driver_detail')
+        return reverse('driver_register')
 
     def __str__(self):
         return str(self.capacity) + ' ' + str(self.driver)
 
-
-# UUID!
 
 class Ride(models.Model):
     """
@@ -62,7 +61,7 @@ class Ride(models.Model):
     ]
     status = models.IntegerField(default=OPEN, choices=RIDES_STATUS)
     owner = models.ForeignKey(my_user, default=None, related_name="owner", on_delete=models.DO_NOTHING)
-    owner_count = models.IntegerField(default=0, verbose_name="Number of Passengers in your party")
+    owner_count = models.IntegerField(default=0, verbose_name="Number of Passengers in your party") #including yourself
     is_shared = models.BooleanField(default=True, verbose_name="Share with others")
     # Include owner, driver, sharers.
     psg = models.ManyToManyField(my_user, default=1, related_name="psg")

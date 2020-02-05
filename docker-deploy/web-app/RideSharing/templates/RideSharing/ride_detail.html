@@ -39,7 +39,7 @@
 
           <a href="#" class="list-group-item list-group-item-action">
               <h5 class="mb-1">Your Driver & Vehicle Information</h5>
-              {% if object.status == object.CONFIRMED %}
+              {% if object.status == object.CONFIRMED or object.COMPLETE %}
                   <div class="d-flex justify-content-between">
                       <p class="text-muted">Driver Email</p>
                       <p>{{ object.driver }}</p>

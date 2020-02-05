@@ -25,7 +25,7 @@ SECRET_KEY = '#292(&3zorpm1=u^j#(1pw=r=urxz3_!^iem9!+9p9_g9ed#x&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web']
+ALLOWED_HOSTS = ['web','vcm-12347.vm.duke.edu']
 
 
 # Application definition

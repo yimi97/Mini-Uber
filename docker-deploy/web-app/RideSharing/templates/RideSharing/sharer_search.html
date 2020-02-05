@@ -4,7 +4,7 @@
 {% block dash_content %}
         <div class="row">
         <div class="col-4">
-              <h5>Search for rides</h5>
+            <legend class="border-bottom mb-4">Search for rides</legend>
               <form method="POST">
                 {% csrf_token %}
                     <div>
@@ -28,7 +28,7 @@
                 </form>
         </div>
         <div class="col-8">
-            <h5>Result</h5>
+            <legend class="border-bottom mb-4">Result</legend>
             <form method="POST">
                 {% csrf_token %}
                     <table class="table table-sm">

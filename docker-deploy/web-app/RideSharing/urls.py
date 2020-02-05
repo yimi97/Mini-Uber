@@ -7,6 +7,7 @@ urlpatterns = [
     path('user_register/', views.UserRegister, name="user_register"),
     path('ride_request/', views_rides.RideRequestView.as_view(), name="ride_request"),
     path('ride_list/', views_rides.RideListView.as_view(), name='ride_list'),
+    path('ride_complete/<int:ride_id>/', views_rides.ride_complete, name='ride_complete'),
     path('ride_detail/<int:pk>/', views_rides.RideDetailView.as_view(), name='ride_detail'),
     path('ride_detail/<int:pk>/update/', views_rides.RideUpdateView.as_view(), name='ride_update'),
     path('login/', auth_views.LoginView.as_view(template_name='RideSharing/login.html'), name='login'),
@@ -15,6 +16,6 @@ urlpatterns = [
     path('driver_search/', views.DriverSearchView, name='driver_search'),
     path('driver_edit/', views.DriverEditView.as_view(), name='driver_edit'),
     path('driver_detail/', views.DriverDetailView.as_view(), name='driver_detail'),
-    path('share_search/', views.ShareSearchView, name='sharer_search'),
+    path('sharer_search/', views.ShareSearchView, name='sharer_search'),
 ]
 

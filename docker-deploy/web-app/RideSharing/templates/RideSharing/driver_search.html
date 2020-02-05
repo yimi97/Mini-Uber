@@ -5,7 +5,8 @@
 {% block dash_content %}
 
 
-        <h5>Rides Search Result</h5> <p class="text-muted font-italic">based on your vehicle information</p>
+<legend class="border-bottom mb-4">Rides Search Result</legend>
+ <p class="text-muted font-italic">based on your vehicle information</p>
         <form method="POST">
             {% csrf_token %}
 
@@ -32,13 +33,14 @@
                             <td><input type="checkbox" name="choose" value="{{ item.id }}"></td>
                         </tr>
                     {% endfor %}
+                {% endif %}             
+                </tbody>
                 </table>
+                {% if ride.exists %}
                 <div class="col-4">
                     <button class="btn btn-outline-info" type="submit" name="confirm" value="confirm">Confirm</button>
                 </div>
                 {% endif %}
-                </tbody>
-
                 </div>
         </form>
 

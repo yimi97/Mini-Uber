@@ -1,0 +1,9 @@
+02/01: 
+1. We found user can add multiple vechicles, then we fix it by checking the user already register not and then redicting.
+2. If the driver clicked confirm button without selecting any ride, it redirected to ride list without doing any meaningful things.
+
+02/03: 
+If non-driver user enter the url '/driver_detail' directly, the app will return 404 page.
+
+02/04: 
+Invalid time window, then fixing it by validating first before searching.
