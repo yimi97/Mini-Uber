@@ -1,6 +1,6 @@
 ## Requirement Coverage(100%):
 
-* 1 - 4: User-friendly UI. Eeay to find button to signup, login and logout. Implemented validation based on the auth provided by django.
+* 1 - 4: User-friendly UI. Easy to find button to signup, login and logout. Implemented validation based on the auth provided by django.
 
 After login, you can enter the dashboard with the function navbar on the left.
 
