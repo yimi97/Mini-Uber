@@ -19,7 +19,9 @@ The default filter is `Non-complete` status.
 The page will display all the rides related to the user, also the allowed kinds of operations is aligned with the requirements.
 
 **Our design Rule**
+
 **Specifically, sharer can only view the ride detail, not editing.**
+
 **Owner can only edit the ride if there is no sharer joined at that time.**
 
 
