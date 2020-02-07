@@ -17,3 +17,6 @@
 1. If 2 drivers tried to confirm the same ride, the later driver's confirmation would overwrite the first one.
 2. A driver can confirm the expired ride.
 (Fixed by only give the valid options.)
+
+02/07
+1. Only one container for all services now, but better to make one container per privilege-level
