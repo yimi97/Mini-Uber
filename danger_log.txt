@@ -14,6 +14,6 @@
 
 
 02/06:
-1. If there is 2 drivers try to confirm the same ride, the later driver's confirmation will overwrite the first one.
+1. If there are 2 drivers try to confirm the same ride, the later driver's confirmation will overwrite the first one.
 2. A driver can confirm the expired ride.
 (Fixed by only give the valid options.)
