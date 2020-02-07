@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import UserRegisterForm, DriverRegisterForm,  ShareSearchForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import my_user, vehicle, Ride
+from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import (
     ListView,
@@ -69,15 +70,6 @@ class DriverEditView(UpdateView, LoginRequiredMixin):
         return get_object_or_404(vehicle, driver=self.request.user)
 
 
-def cal_cap(ride):
-    for r in ride:
-        num = r.owner_count
-        for key, value in r.sharer_info:
-            num += value
-        r['num_psg'] = num
-    return r
-
-
 @login_required
 def DriverSearchView(request):
     if not vehicle.objects.filter(driver=request.user).exists():
@@ -89,7 +81,8 @@ def DriverSearchView(request):
     ride = Ride.objects.filter(Q(vehicle_type=driver.type),
                                Q(psg_count__lte=driver.capacity),
                                (Q(special_request=None) | Q(special_request=driver.special_request)),
-                               Q(status__range=(0, 1))
+                               Q(status__range=(0, 1)),
+                               Q(arrival_daytime__gt=timezone.now())
                                ).exclude(psg=request.user)
 
     if request.method == 'POST':
@@ -159,7 +152,7 @@ def ShareSearchView(request):
 
 def send_confirm_email(r):
     subject = 'Your order to ' + str(r.dest) + ' is confirm.'
-    message = 'Thank you you choosing Yi & Yueying \'s RideSharing App.'
+    message = 'Thank you for choosing Yi & Yueying \'s RideSharing App.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [r.owner.email]
     if r.sharer_info is not None:

@@ -1,9 +1,19 @@
 02/01: 
-1. We found user can add multiple vechicles, then we fix it by checking the user already register not and then redicting.
+1. We found user can add multiple vechicles.
+(Fixed it by checking whether the user already registered or not and doing corresponding redicting)
 2. If the driver clicked confirm button without selecting any ride, it redirected to ride list without doing any meaningful things.
+(Fixed it by checking the list of confirmed ride id)
 
 02/03: 
-If non-driver user enter the url '/driver_detail' directly, the app will return 404 page.
+1. If non-driver user enter the url '/driver_detail' directly, the app will return 404 page.
+(Now no UI component will lead to the '/driver_detail' without checking driver registration)
 
 02/04: 
-Invalid time window, then fixing it by validating first before searching.
+1. Invalid request time window
+(Fixed it by validating first before searching)
+
+
+02/06:
+1. If there is 2 drivers try to confirm the same ride, the later driver's confirmation will overwrite the first one.
+2. A driver can confirm the expired ride.
+(Fixed by only give the valid options.)

@@ -1,100 +1,100 @@
 {% extends "./dashboard.html" %}
 {% block dash_content %}
 
-      <div class="list-group list-group-flush">
-          <a href="#" class="list-group-item list-group-item-action">
-              <h2 class="mb-1">Trip to {{ object.dest }}</h2>
-          </a>
-          <a href="#" class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Your Ride</h5>
-                  <div class="d-flex justify-content-between">
-                  <p class="text-muted">Status </p>
-                  <p class="mb-1">{{ object.get_status_display }}</p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Estimated Arrival Time </p>
-                      <p class="mb-1">{{ object.arrival_daytime }}</p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Number of passengers with Owner </p>
-                      <p class="mb-1">{{ object.owner_count }}</p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Can be shared with other User </p>
-                      <p class="mb-1">{{ object.is_shared|yesno:"Yes,No" }}</p>
-                  </div>
-              {% if object.vehicle_type %}
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Expected vehicle type</p>
-                      <p class="mb-1">{{ object.vehicle_type }}</p>
-                  </div>
-              {% endif %}
-              {% if object.special_request %}
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Special Request </p>
-                      <p class="mb-1">{{ object.special_request }}</p>
-                  </div>
-              {% endif %}
-          </a>
-
-          <a href="#" class="list-group-item list-group-item-action">
-              <h5 class="mb-1">Your Driver & Vehicle Information</h5>
-              {% if object.status == object.CONFIRMED or object.COMPLETE %}
-                  <div class="d-flex justify-content-between">
-                      <p class="text-muted">Driver Email</p>
-                      <p>{{ object.driver }}</p>
-                  </div>
-                  {% for item in vehicle %}
-                      <div class="d-flex justify-content-between">
-                          <p class="text-muted">Plate Number </p>
-                          <p>{{ item.plate_num }}</p>
-                      </div>
-                      <div class="d-flex justify-content-between">
-                          <p class="text-muted">Capacity </p>
-                          <p >{{ item.capacity }}</p>
-                      </div>
-                  {% endfor %}
-              {% else %}
-                  <p class="text-muted">Ride will be confirmed soon! </p>
-              {% endif %}
-          </a>
-
-          {% if object.is_shared %}
-              <a href="#" class="list-group-item list-group-item-action">
-                  <h5 class="mb-1">All passengers info</h5>
-                  <div class="d-flex justify-content-between">
-                          <p class="text-muted">Owner </p>
-                          <p class="text-muted">Number of Owner's Party</p>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                          <p class="">{{ object.owner.email }}</p>
-                          <p class="">{{ object.owner_count }}</p>
-                  </div>
-                  {% if object.sharer_info %}
-                      <div class="d-flex justify-content-between">
-                          <p class="text-muted">Sharer's Email </p>
-                          <p class="text-muted">Number of their party</p>
-                      </div>
-                      {% for key,value in object.sharer_info.items %}
-                          <div class="d-flex justify-content-between">
-                              <p class="">{{ key }}  </p>
-                              <p class="">{{ value }}</p>
-                          </div>
-                      {% endfor %}
-                  {% else %}
-                      <p class="text-muted">No sharer yet</p>
-                  {% endif %}
-              </a>
-          {% endif %}
-          {% if object.owner == user %}
-          <div class="d-flex justify-content-end">
-            <a class="btn btn-outline-primary mt-1 mb-1 mr-1 btn-sm" href="{% url 'ride_list' %}">Return to List</a>
-              {% if object.status == object.OPEN or object.status == object.OPEN_WITH_SHARER %}
-            <a class="btn btn-outline-primary mt-1 mb-1 btn-sm" href="{% url 'ride_update' object.id %}">Edit</a>
-              {% endif %}
-          </div>
+<div class="list-group list-group-flush">
+    <a href="#" class="list-group-item list-group-item-action">
+        <h2 class="mb-1">Trip to {{ object.dest }}</h2>
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">
+        <h5 class="mb-1">Your Ride</h5>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Status </p>
+            <p class="mb-1">{{ object.get_status_display }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Estimated Arrival Time </p>
+            <p class="mb-1">{{ object.arrival_daytime }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Number of passengers with Owner </p>
+            <p class="mb-1">{{ object.owner_count }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Can be shared with other User </p>
+            <p class="mb-1">{{ object.is_shared|yesno:"Yes,No" }}</p>
+        </div>
+        {% if object.vehicle_type %}
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Expected vehicle type</p>
+            <p class="mb-1">{{ object.vehicle_type }}</p>
+        </div>
         {% endif %}
-      </div>
+        {% if object.special_request %}
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Special Request </p>
+            <p class="mb-1">{{ object.special_request }}</p>
+        </div>
+        {% endif %}
+    </a>
+
+    <a href="#" class="list-group-item list-group-item-action">
+        <h5 class="mb-1">Your Driver & Vehicle Information</h5>
+        {% if object.status == object.CONFIRMED or object.COMPLETE %}
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Driver Email</p>
+            <p>{{ object.driver }}</p>
+        </div>
+        {% for item in vehicle %}
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Plate Number </p>
+            <p>{{ item.plate_num }}</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Capacity </p>
+            <p>{{ item.capacity }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="text-muted">Ride will be confirmed soon! </p>
+        {% endif %}
+    </a>
+
+    {% if object.is_shared %}
+    <a href="#" class="list-group-item list-group-item-action">
+        <h5 class="mb-1">All passengers info</h5>
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Owner </p>
+            <p class="text-muted">Number of Owner's Party</p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <p class="">{{ object.owner.email }}</p>
+            <p class="">{{ object.owner_count }}</p>
+        </div>
+        {% if object.sharer_info %}
+        <div class="d-flex justify-content-between">
+            <p class="text-muted">Sharer's Email </p>
+            <p class="text-muted">Number of their party</p>
+        </div>
+        {% for key,value in object.sharer_info.items %}
+        <div class="d-flex justify-content-between">
+            <p class="">{{ key }} </p>
+            <p class="">{{ value }}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="text-muted">No sharer yet</p>
+        {% endif %}
+    </a>
+    {% endif %}
+    {% if object.owner == user %}
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-outline-primary mt-1 mb-1 mr-1 btn-sm" href="{% url 'ride_list' %}">Return to List</a>
+        {% if object.status == object.OPEN  %}
+        <a class="btn btn-outline-primary mt-1 mb-1 btn-sm" href="{% url 'ride_update' object.id %}">Edit</a>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
 
 
 {% endblock  %}

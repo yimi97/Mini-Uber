@@ -54,7 +54,7 @@
       <td class="d-flex ">
         <a class="btn btn-outline-primary btn-sm mr-2" href="{% url 'ride_detail' ride.id %}">Detail</a>
         {% if ride.owner == user%}
-        {% if ride.status == ride.OPEN or ride.status == ride.OPEN_WITH_SHARER  %}
+        {% if ride.status == ride.OPEN   %}
         <a class="btn btn-outline-secondary btn-sm " href="{% url 'ride_update' ride.id %}">Edit</a>
         {% endif %}
         {% endif %}
