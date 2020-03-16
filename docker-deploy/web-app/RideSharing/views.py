@@ -96,7 +96,7 @@ def DriverSearchView(request):
                     r.psg.add(request.user)
                     # send email to r.sharer r.owner
                     r.save()
-                    send_confirm_email(r)
+                    send_confirm_email(r)  
                 return redirect('ride_list')
             else:
                 return redirect('driver_search')
@@ -155,8 +155,10 @@ def send_confirm_email(r):
     message = 'Thank you for choosing Yi & Yueying \'s RideSharing App.'
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [r.owner.email]
+
     if r.sharer_info is not None:
-        for key, value in r.sharer_info:
+        for key, value in r.sharer_info.items():
             recipient_list.append(key)
+    print(recipient_list)
     send_mail(subject, message, email_from, recipient_list)
 
