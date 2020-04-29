@@ -31,3 +31,8 @@ The page will display all the rides related to the user, also the allowed kinds 
 
 * 18 - 20: Click `Ride` + Select role as Driver
 
+
+## Run Instruction
+`cd docker-deploy`
+
+`sudo docker-compose up`
